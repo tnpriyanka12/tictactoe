@@ -3,24 +3,42 @@ console.log(`HERE IN JS!`);
 $(document).ready(function(){
   console.log(`DOM LOADED!`);
 
-  let $row11 = $('.row1 .box-1');
-  let $row12 = $('.row1 .box-2');
-  let $row13 = $('.row1 .box-3');
+  //background theme - chalkboard
+  $('body').css({
+  backgroundImage: 'url("images/chalkboard_bg.jpeg")',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  fontFamily: 'My Chalkboard'
+  });
+
+  //Drawing tic tac toe lines
+
+
   let $box = $('.box');
   let symbolCount = 0;
-  let boxContents = {
-    row0: [],
-    row1: [],
-    row2: []
-    };
+  let box = {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
+  };
 
   //detecting click on boxes
   $('.box').on('click', function(){
     // is this square already occupied?
     const symbolToInsert = checkSymbol();
-    let currBox = $(this).attr('id');
     $(this).html(symbolToInsert);
-    //checkForMatch();
+    $(this).css({
+      height: '100px',
+      fontSize: '100px'
+    })
+    $(this).removeClass('box').addClass('symbol'+symbolToInsert);
+    checkForMatch();
   });
 
 const checkSymbol = function(){
@@ -32,8 +50,9 @@ const checkSymbol = function(){
   }
   symbolCount++;
 
-  //If all 9 turns are over
-  if(symbolCount == 9){
+  //If all  turns are over
+  $box = $('.box')
+  if($box.length == 1){
     allTurnsFinished();
   }
   return symbol;
@@ -41,30 +60,59 @@ const checkSymbol = function(){
 
 
 const checkForMatch = function(){
+  //debugger;
+  box[1] = $('#row11').html();
+  box[2] = $('#row12').html();
+  box[3] = $('#row13').html();
+  box[4] = $('#row21').html();
+  box[5] = $('#row22').html();
+  box[6] = $('#row23').html();
+  box[7] = $('#row31').html();
+  box[8] = $('#row32').html();
+  box[9] = $('#row33').html();
 
+//WIN LOGIC
+if(box[1]+box[2]+box[3] ==='OOO' || box[1]+box[2]+box[3] ==='XXX'){
+  console.log(`row1 match `);
+  $span = $('<span></span>');
+  $span.css({
+      borderLeft: '6px solid white',
+      height: '500px',
+      position: 'absolute',
+      left: '39%',
+      transform: 'rotateX(90deg)'
+  });
+  $('#game_container').prepend($span);
 }
+else if(box[4]+box[5]+box[6] ==='OOO' || box[4]+box[5]+box[6] ==='XXX'){
+console.log(`row2 match`);
+}
+else if(box[7]+box[8]+box[9] ==='OOO' || box[7]+box[8]+box[9] ==='XXX'){
+console.log(`row3 match`);
+}
+else if(box[1]+box[4]+box[7] ==='OOO' || box[1]+box[4]+box[7] ==='XXX'){
+  console.log(`col1 match`);
+}
+else if(box[2]+box[5]+box[8] ==='OOO' || box[2]+box[5]+box[8] ==='XXX'){
+console.log(`col2 match`);
+}
+else if(box[3]+box[6]+box[9] ==='OOO' || box[3]+box[6]+box[9] ==='XXX'){
+console.log(`col3 match`);
+}
+else if(box[1]+box[5]+box[9] ==='OOO' || box[1]+box[5]+box[9] ==='XXX'){
+console.log(`diag \\ match`);
+}
+else if(box[3]+box[5]+box[7] ==='OOO' || box[3]+box[5]+box[7] ==='XXX'){
+console.log(`diag / match`);
+}
+
+
+
+}//checkForMatch ()
+
 
 const allTurnsFinished = function(){
   console.log(`GAME OVER`);
-  $('.box').off('click');//off clicks on boxes
-  symbolCount = 0;
 }
-
-
-const showSymbol = function(){
-  const $div = $('<div>');
-  $div.addClass('symbol');
-  // $div.css({
-  //   backgroundImage:  'url(https://qph.ec.quoracdn.net/main-qimg-4ac0bf076120fa49f9b925d735b1578a)',
-  //   // 'background-image':  'url(https://qph.ec.quoracdn.net/main-qimg-4ac0bf076120fa49f9b925d735b1578a)',
-  //   backgroundSize: 'cover',
-  //   width: '100%',
-  //   height: '100%',
-  //   border: '2px solid red'
-  // });
-  $('li.box-1').append($div);
-};
-
-
 
 });//ready fn()
