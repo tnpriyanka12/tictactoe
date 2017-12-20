@@ -1,3 +1,8 @@
+*{
+  box-sizing: border
+}
+
+
 body{
   margin : 20px;
   padding : 20px;
@@ -9,6 +14,7 @@ body{
 
 
 h1{
+  /*display: block;*/
   text-align: center;
   font-style: oblique;
   font-size: 40px;
@@ -16,59 +22,39 @@ h1{
   margin: 0px;
 }
 
-h2{
+.header_container{
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   text-align: center;
   max-width: 800px;
   position: absolute;
-  left: 20%;
+  left: 25%;
   /*border: 2px solid red;*/
-  padding: 10px;
-  margin: 10px;
 }
+
+
+
 
 #game_container{
   position: absolute;
-  top: 30%;
+  top: 130%;
   left: 30%;
 }
-div li{
 
-  display: inline;
-  /*border: 2px solid green;*/
-}
-ul li{
+.box{
+  display: inline-block;
   height: 100px;
   width: 100px;
   display: inline-block;
   /*border: 2px solid white;*/
-  padding: 10px;
-  margin: 10px;
+  vertical-align : top;
 }
 
+#row11, #row21, #row31, #row12, #row22, #row32{
+  border-right: 2px solid white;
+}
 
-.vl {
-    border-left: 6px solid white;
-    height: 500px;
-    position: absolute;
-    left: 39%;
-}
-.vl2 {
-    border-left: 6px solid white;
-    height: 500px;
-    position: absolute;
-    left: 70%;
-}
-.hl {
-    border-top: 6px solid white;
-    width: 500px;
-    position: absolute;
-    top: 30%;
-}
-.hl2 {
-    border-top: 6px solid white;
-    width: 500px;
-    position: absolute;
-    top: 60%;
+#row2, #row3{
+  border-top: 2px solid white;
+
 }
