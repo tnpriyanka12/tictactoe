@@ -51,13 +51,7 @@ $('.play-button').on('click', function(){
 
 //Reset game
 const resetGame = function(){
-  //If game over, promt user to restart
-  $('.play-button').html('GAME OVER. CLICK TO RESTART');
-  $('.play-button').animate({
-    fontSize: '40px'
-  }, )
-  // $('#game_container').hide();
-  //Reset Parameters
+
   gameOver = false;
   $box.html('');
   symbolCount = 0;
@@ -74,12 +68,13 @@ let gameChecks = {
 
     $gamestatus = $('#game-status');
     symbolCount--;
-    $gamestatus.html(`Player ${this.checkSymbol()} WINS(${symbolCount})`);
+    $gamestatus.css({
+      fontSize: '20px'
+    });
+    $gamestatus.html(`Player  ${this.checkSymbol()}  WINS`);
      gameOver = true;
     // //if( gameOver || squareIsOccupied(this) ){
-
-
-    //askForRepeatPlay();
+    this.askForRepeatPlay();
   },
 
 
@@ -168,8 +163,24 @@ checkForMatch: function(){
 
 
 askForRepeatPlay: function(){
+console.log(`Do you wish to replay??`);
+//If game over, promt user to restart
+$('.play-button').html('GAME OVER!!!!');
+$('.play-button').animate({
+  fontSize: '20px'
+});
 
-}
+  $para = $('<p></p>');
+  $para.css({
+    fontSize: '20px'
+  });
+  $('.play-button').append($para);
+  $para.html('->RESTART (click to restart)<-');
+    $('.play-button p').on('click', function(){
+      resetGame();
+    });
+
+  }
 
 };//gameChecks
 
