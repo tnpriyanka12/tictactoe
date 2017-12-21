@@ -1,4 +1,12 @@
 
+/*background theme - chalkboard*/
+body{
+background-image: url("../images/chalkboard_bg.jpeg");
+background-repeat: no-repeat;
+background-size: cover;
+font-family: 'My Chalkboard';
+}
+
 
 body{
   background-color: black;
@@ -29,6 +37,7 @@ h1{
   /*border: 2px solid red;*/
 }
 #game_container{
+  display: none;
   position: absolute;
   top: 110%;
   left: 30%;
@@ -74,4 +83,10 @@ footer{
 
 .hearts{
   display : none;
+}
+
+
+#gamestatus{
+  position: absolute;
+  bottom: 50px;
 }

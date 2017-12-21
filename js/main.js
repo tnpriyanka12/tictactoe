@@ -1,21 +1,6 @@
 console.log(`HERE IN JS!`);
 
 $(document).ready(function(){
-  console.log(`DOM LOADED!`);
-
-
-  //background theme - chalkboard
-  $('body').css({
-  backgroundImage: 'url("images/chalkboard_bg.jpeg")',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  fontFamily: 'My Chalkboard'
-  });
-
-  //Hide the # initially -> show on click of play button
-  $('#game_container').hide();
-
-
   //Global Variable for accessing box & symbol count
   let $box = $('.box');
   let symbolCount = 0;
@@ -29,8 +14,12 @@ $('.play-button').on('click', function(){
   //Show the # once play button is hit
   $('#game_container').slideDown('slow');
 
-  //detecting click on boxes
-  $('.box').on('click', function(){
+
+
+    //detecting click on boxes
+    $('.box').on('click', function(){
+
+    // $(this).text().length
 
     //Check which symbol to insert
     const symbolToInsert = gameChecks.checkSymbol();
@@ -53,7 +42,6 @@ $('.play-button').on('click', function(){
 
 
 
-
 //Reset game
 const resetGame = function(){
 
@@ -63,7 +51,7 @@ const resetGame = function(){
   $('.symbolX').html('');
 
   symbolCount = 0;
-  $gamestatus.html('');//better way??
+  $gamestatus.html('');
 };
 
 //This object contains all functions needed for the game
@@ -73,11 +61,13 @@ let gameChecks = {
   //Check for Which player won & display in #game-status class
   gameStatus: function(){
     $gamestatus = $('#game-status');
-    symbolCount--;
     $gamestatus.css({
       fontSize: '20px'
     });
 
+    //Print which player wins (symbol count one step back)
+    symbolCount--;
+    debugger;
     $gamestatus.html(`Player  ${this.checkSymbol()}  WINS`);
     $('.box').off('click');//??no clicks on boxes , as soon as player wins
     // //if( gameOver || squareIsOccupied(this) ){
@@ -108,17 +98,7 @@ checkSymbol: function() {
 
 //All possible 'win' situations are checked
 checkForMatch: function(){
-  let box = {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    5: '',
-    6: '',
-    7: '',
-    8: '',
-    9: '',
-  };
+  let box = {};
   box[1] = $('#row11').html();
   box[2] = $('#row12').html();
   box[3] = $('#row13').html();
@@ -169,44 +149,47 @@ checkForMatch: function(){
 },//checkForMatch ()
 
 
+
+
 askForRepeatPlay: function(){
   gameOver = true;
-console.log(`Do you wish to replay??`);
-//If game over, promt user to restart
-$('.play-button').html('GAME OVER!!!!');
-$('.play-button').animate({
-  fontSize: '20px'
-});
-
-  $para = $('<p></p>');
-  $para.css({
+  //If game over, promt user to restart
+  $('.play-button').html('GAME OVER!!!!');
+  $('.play-button').animate({
     fontSize: '20px'
   });
-  $('.play-button').append($para);
-  $para.html('->RESTART (click to restart)<-');
-  $para.css({
-    border: '2px dashed white'
-  })
+
+    $para = $('<p></p>');
+    $para.css({
+      fontSize: '20px'
+    });
+    $('.play-button').append($para);
+    $para.html('->RESTART (click to restart)<-');
+    $para.css({
+      border: '2px dashed white',
+      transform: 'scale(1)'
+    });
+    console.log($para);
+    $para.animate({
+      fontSize: '20pt'
+    }, 2500);
+
     $('.play-button p').on('click', function(){
       resetGame();
     });
 
-  },
+},
 
 
    allTurnsFinished : function(){
     console.log(`ALL TURNS FIN MATCH DRAW`);
     $gamestatus = $('#game-status');
     $gamestatus.html(`MATCH DRAW`);
-    // $playbutton.html();
     this.askForRepeatPlay();
   }
 
 
 };//gameChecks
-
-
-
 
 
 })//play-button
