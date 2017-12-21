@@ -13,29 +13,94 @@ $(document).ready(function(){
   const multiplePlays = 0;
   let playerOneWinCount = 0;
   let playerTwoWinCount = 0;
+  let playMode = 'single';
+  //let playMode = 'multi';
+  let box = {};
+  const aiActve = 0;
+
+  let randBox = '';
 
 
 //Start when play button is clicked
 $('.play-button').on('click', function(){
-  $('.box').css({
-  backgroundColor: '',
-  color: 'white'
-  })
+
+    $('.box').css({
+    backgroundColor: '',
+    color: 'white'
+    });
+
+
+  // //for first time
+  // playMode = ($(this).attr('class') == 'multiplay-button') ? 'multi' : 'single';
+  // console.log(`class clicked is : ${$(this).attr('class')},  ${playMode}`);
+
   //As soon as play is hit
   $playbutton.html('Game in Progress...')
   //Show the game board
   $('#game_container').slideDown('slow');
+
+
     //As a box clicks, check which symbol to insert and check for match
     $('.box').on('click', function(){
+        console.log(`hello hereeeee`);
     const symbolToInsert = gameChecks.checkSymbol();
     $(this).html(symbolToInsert);
     $(this).css({
       height: '100px',
       fontSize: '50px'
     });
+    console.log(`im hereeeeeee: ${symbolCount}`);
+
     //Once symbol is inserted, check for Match, i.e, check for win
     gameChecks.checkForMatch();
-  });
+
+
+          if(aiActve && symbolCount %2 == 1){
+            let availBoxes= [];
+
+            box[1] = $('#row11').text();
+            box[2] = $('#row12').text();
+            box[3] = $('#row13').text();
+            box[4] = $('#row21').text();
+            box[5] = $('#row22').text();
+            box[6] = $('#row23').text();
+            box[7] = $('#row31').text();
+            box[8] = $('#row32').text();
+            box[9] = $('#row33').text();
+
+            for( let i = 1; i < 10; i++ ){
+             if(box[i] == ''){
+               availBoxes.push(i);
+              console.log(`after push: ${availBoxes}`);
+
+             }
+           }//for
+
+            let randNumForAvailBoxes = (Math.floor ( Math.random() * availBoxes.length ));
+            randBox = availBoxes[randNumForAvailBoxes];
+            console.log(`after rand: ${randNumForAvailBoxes}, ${randBox}`);
+
+            let randrow = '';
+
+            if(randBox == 1)      randrow = '#row11';
+            else if(randBox == 2) randrow  = '#row12';
+            else if(randBox == 3) randrow  = '#row13';
+            else if(randBox == 4) randrow  = '#row21';
+            else if(randBox == 5) randrow  = '#row22';
+            else if(randBox == 6) randrow  = '#row23';
+            else if(randBox == 7) randrow  = '#row31';
+            else if(randBox == 8) randrow = '#row32';
+            else if(randBox == 9) randrow = '#row33';
+            console.log(`randrow: ${randrow}`);
+
+            $(randrow).html('X');
+            symbolCount++;
+            return;
+
+          }
+
+
+  });//box
 
 
 
@@ -50,7 +115,7 @@ let gameChecks = {
     let symbol = 0;
     if(symbolCount % 2 == 0){
         symbol =  'O';
-    } else{
+    } else {
         symbol =  'X';
     }
     symbolCount++;
@@ -66,13 +131,31 @@ let gameChecks = {
     symbolCount--;
     $gamestatus.html(`Player  ${this.checkSymbol()}  WINS`);
     $('.box').off('click');
+
+    if(playMode == 'multi'){
+      console.log(`cureeeent symb: ${this.checkSymbol()}`);
+      if(this.checkSymbol() == 'X'){
+        playerOneWinCount++;
+        console.log(`cureeeent player1count: ${playerOneWinCount}`);
+
+      } else {
+        playerTwoWinCount++
+        console.log(`cureeeent player2count: ${playerTwoWinCount}`);
+
+      }
+
+      $gamestatus.html(`Player  ${this.checkSymbol()}  WINS
+      <br/>Player X Score : ${playerOneWinCount}
+      <br/>Player O Score : ${playerTwoWinCount}`);
+    };
+
     askForRepeatPlay();
   },
 
 
 //All possible 'win' situations are checked
 checkForMatch: function(){
-  let box = {};
+
   box[1] = $('#row11').text();
   box[2] = $('#row12').text();
   box[3] = $('#row13').text();
@@ -149,8 +232,7 @@ checkForMatch: function(){
 
 };//gameChecks
 
-
-})//play-button
+});//play-button
 
 
 
@@ -178,6 +260,7 @@ const allTurnsFinished = function(){
 const askForRepeatPlay =  function(){
     gameOver = true;
     console.log(`symb countrepplay = ${symbolCount}`);
+
 
     //If game over, promt user to restart
     $('.play-button').html('GAME OVER!!!!');

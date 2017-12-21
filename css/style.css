@@ -93,15 +93,12 @@ footer{
 
 
 
-.game-mode{
+.singleplay-button{
+
   display: none;
 }
-.singlegame{
-  position: absolute;
-  left: 25%;
-}
 
-.multigame{
-  position: absolute;
-  right: 25%;
+.multiplay-button{
+
+  display: none;
 }
