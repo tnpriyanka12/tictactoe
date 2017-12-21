@@ -1,197 +1,206 @@
 console.log(`HERE IN JS!`);
 
+
+
+
 $(document).ready(function(){
   //Global Variable for accessing box & symbol count
   let $box = $('.box');
   let symbolCount = 0;
   let $playbutton = $('.play-button');
   let gameOver = false;
+  let addImage = 1;
+  const multiplePlays = 0;
+  let playerOneWinCount = 0;
+  let playerTwoWinCount = 0;
+
 
 //Start when play button is clicked
 $('.play-button').on('click', function(){
-  //As soon as user clicks to start game
+  $('.box').css({
+  backgroundColor: '',
+  color: 'white'
+  })
+  //As soon as play is hit
   $playbutton.html('Game in Progress...')
-  //Show the # once play button is hit
+  //Show the game board
   $('#game_container').slideDown('slow');
-
-
-
-    //detecting click on boxes
+    //As a box clicks, check which symbol to insert and check for match
     $('.box').on('click', function(){
-
-    // $(this).text().length
-
-    //Check which symbol to insert
     const symbolToInsert = gameChecks.checkSymbol();
-    //Add class and symbol and attach to the current class
     $(this).html(symbolToInsert);
     $(this).css({
       height: '100px',
       fontSize: '50px'
-    })
-    $(this).addClass('symbol'+symbolToInsert).off('click');
+    });
     //Once symbol is inserted, check for Match, i.e, check for win
     gameChecks.checkForMatch();
-
-    if( gameOver ){
-      //resetGame();
-      gameOver = false;
-      return;
-    }
   });
 
 
 
-//Reset game
-const resetGame = function(){
-
-  gameOver = false;
-  $box.html('');
-  $('.symbolO').html('');
-  $('.symbolX').html('');
-
-  symbolCount = 0;
-  $gamestatus.html('');
-};
-
 //This object contains all functions needed for the game
 //Symbols, images , turns , related checks etc
-
 let gameChecks = {
-  //Check for Which player won & display in #game-status class
-  gameStatus: function(){
+
+  //Check which symbol to inserted
+  //Alternate between symbols.
+  //When All turns are over (9 turns) -> game finished
+  checkSymbol: function() {
+    let symbol = 0;
+    if(symbolCount % 2 == 0){
+        symbol =  'O';
+    } else{
+        symbol =  'X';
+    }
+    symbolCount++;
+    return symbol;
+  },//checkSymbol()
+
+  //Check & Display Which player won & display in #game-status class
+  checkGameStatus: function(){
     $gamestatus = $('#game-status');
     $gamestatus.css({
       fontSize: '20px'
     });
-
-    //Print which player wins (symbol count one step back)
     symbolCount--;
-    debugger;
     $gamestatus.html(`Player  ${this.checkSymbol()}  WINS`);
-    $('.box').off('click');//??no clicks on boxes , as soon as player wins
-    // //if( gameOver || squareIsOccupied(this) ){
-    this.askForRepeatPlay();
+    $('.box').off('click');
+    askForRepeatPlay();
   },
-
-
-//Check which symbol to inserted
-//Alternate between symbols.
-//When All turns are over (9 turns) -> game finished
-checkSymbol: function() {
-  let symbol = 0;
-  if(symbolCount % 2 == 0){
-      symbol =  'O';
-  } else{
-      symbol =  'X';
-  }
-  symbolCount++;
-  //debugger;
-  //If all  turns are over
-  if(symbolCount == 9){
-    this.allTurnsFinished();
-    symbolCount= 0;
-  }
-  return symbol;
-},//checkSymbol()
 
 
 //All possible 'win' situations are checked
 checkForMatch: function(){
   let box = {};
-  box[1] = $('#row11').html();
-  box[2] = $('#row12').html();
-  box[3] = $('#row13').html();
-  box[4] = $('#row21').html();
-  box[5] = $('#row22').html();
-  box[6] = $('#row23').html();
-  box[7] = $('#row31').html();
-  box[8] = $('#row32').html();
-  box[9] = $('#row33').html();
+  box[1] = $('#row11').text();
+  box[2] = $('#row12').text();
+  box[3] = $('#row13').text();
+  box[4] = $('#row21').text();
+  box[5] = $('#row22').text();
+  box[6] = $('#row23').text();
+  box[7] = $('#row31').text();
+  box[8] = $('#row32').text();
+  box[9] = $('#row33').text();
 
   //WIN LOGIC
   if(box[1]+box[2]+box[3] ==='OOO' || box[1]+box[2]+box[3] ==='XXX'){
-    this.gameStatus();
-  }
+    this.checkGameStatus();
+    $('#row11, #row12, #row13').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
+    }
   else if(box[4]+box[5]+box[6] ==='OOO' || box[4]+box[5]+box[6] ==='XXX'){
-    this.gameStatus();
+    this.checkGameStatus();
+    $('#row21, #row22, #row23').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[7]+box[8]+box[9] ==='OOO' || box[7]+box[8]+box[9] ==='XXX'){
-    this.gameStatus();
-
-  console.log(`row3 match`);
+    this.checkGameStatus();
+    $('#row31, #row32, #row33').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[1]+box[4]+box[7] ==='OOO' || box[1]+box[4]+box[7] ==='XXX'){
-    this.gameStatus();
-
-    console.log(`col1 match`);
+    this.checkGameStatus();
+    $('#row11, #row21, #row31').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[2]+box[5]+box[8] ==='OOO' || box[2]+box[5]+box[8] ==='XXX'){
-    this.gameStatus();
-
-  console.log(`col2 match`);
+    this.checkGameStatus();
+    $('#row12, #row22, #row32').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[3]+box[6]+box[9] ==='OOO' || box[3]+box[6]+box[9] ==='XXX'){
-    this.gameStatus();
-
-  console.log(`col3 match`);
+    this.checkGameStatus();
+    $('#row13, #row23, #row33').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[1]+box[5]+box[9] ==='OOO' || box[1]+box[5]+box[9] ==='XXX'){
-    this.gameStatus();
-
-  console.log(`diag \\ match`);
+    this.checkGameStatus();
+    $('#row11, #row22, #row33').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
   else if(box[3]+box[5]+box[7] ==='OOO' || box[3]+box[5]+box[7] ==='XXX'){
-    this.gameStatus();
-
-  console.log(`diag / match`);
+    this.checkGameStatus();
+    $('#row13, #row22, #row31').css({
+      backgroundColor: 'rgba(255,255,255,.4)',
+      color: 'black'
+    });
   }
-},//checkForMatch ()
-
-
-
-
-askForRepeatPlay: function(){
-  gameOver = true;
-  //If game over, promt user to restart
-  $('.play-button').html('GAME OVER!!!!');
-  $('.play-button').animate({
-    fontSize: '20px'
-  });
-
-    $para = $('<p></p>');
-    $para.css({
-      fontSize: '20px'
-    });
-    $('.play-button').append($para);
-    $para.html('->RESTART (click to restart)<-');
-    $para.css({
-      border: '2px dashed white',
-      transform: 'scale(1)'
-    });
-    console.log($para);
-    $para.animate({
-      fontSize: '20pt'
-    }, 2500);
-
-    $('.play-button p').on('click', function(){
-      resetGame();
-    });
-
-},
-
-
-   allTurnsFinished : function(){
-    console.log(`ALL TURNS FIN MATCH DRAW`);
-    $gamestatus = $('#game-status');
-    $gamestatus.html(`MATCH DRAW`);
-    this.askForRepeatPlay();
+  else if(symbolCount == 9){
+    console.log(`match draw`);
+    allTurnsFinished();
   }
 
+}//checkForMatch ()
 
 };//gameChecks
 
 
 })//play-button
+
+
+
+
+//Reset game
+const resetGame = function(){
+  gameOver = false;
+  $box.html('');
+  symbolCount = 0;
+  $gamestatus.html('');
+};//resetGame
+
+
+const allTurnsFinished = function(){
+    console.log(`ALL TURNS FIN MATCH DRAW`);
+    console.log(`symb count1 = ${symbolCount}`);
+    $gamestatus = $('#game-status');
+    $gamestatus.html(`MATCH DRAW`);
+      $('.box').off('click');
+    askForRepeatPlay();
+
+};//allTurnsfinished
+
+
+const askForRepeatPlay =  function(){
+    gameOver = true;
+    console.log(`symb countrepplay = ${symbolCount}`);
+
+    //If game over, promt user to restart
+    $('.play-button').html('GAME OVER!!!!');
+    $('.play-button').animate({
+      fontSize: '20px'
+    });
+
+      $para = $('<p></p>');
+      $para.css({
+        fontSize: '20px'
+      });
+      $('.play-button').append($para);
+      $para.html('->RESTART (click to restart)<-');
+      console.log($para);
+      $para.animate({
+        fontSize: '20pt'
+      }, 2500);
+
+      $('.play-button p').on('click', function(){
+        resetGame();
+      });
+
+};
+
 
 });//ready fn()
