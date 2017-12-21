@@ -16,7 +16,7 @@ $(document).ready(function(){
   let playMode = 'single';
   //let playMode = 'multi';
   let box = {};
-  const aiActve = 0;
+  const aiActve = 1;
 
   let randBox = '';
 
@@ -89,12 +89,17 @@ $('.play-button').on('click', function(){
             else if(randBox == 5) randrow  = '#row22';
             else if(randBox == 6) randrow  = '#row23';
             else if(randBox == 7) randrow  = '#row31';
-            else if(randBox == 8) randrow = '#row32';
-            else if(randBox == 9) randrow = '#row33';
+            else if(randBox == 8) randrow  = '#row32';
+            else if(randBox == 9) randrow  = '#row33';
             console.log(`randrow: ${randrow}`);
 
             $(randrow).html('X');
+            $(randrow).css({
+              height: '100px',
+              fontSize: '50px'
+            });
             symbolCount++;
+            gameChecks.checkForMatch();
             return;
 
           }

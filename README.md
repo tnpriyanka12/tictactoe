@@ -18,6 +18,7 @@ file:///Users/ramidipriyanka/wdi/projects/project0/index.html
 -> When game is drawn , only X is printing in box - fixed
 -> Multi game mode is not enabled from screen, works when variable is set in JS file
 -> image mode (not working)
+-> AI is not at all intelligent. Just puts X in random boxes
 
 
 -------FEATURES------
