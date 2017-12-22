@@ -228,7 +228,7 @@ const aiModeGame = function(){
   initGame();
 };
 
-
+//ACTUAL
   $('.play-button').on( 'click', initGame );
   $('.multiplay-button').on('click', multiGame);
   $('.aimode-button').on('click', aiModeGame);

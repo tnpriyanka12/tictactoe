@@ -19,13 +19,16 @@ https://tnpriyanka12.github.io/tictactoe/
 -> Multi game mode is not enabled from screen, works when variable is set in JS file
 -> image mode (not working)
 -> AI is not at all intelligent. Just puts X in random boxes
-
+->Errors during AI mode, but game works !!
+-> multiple box clicks x
 
 -------FEATURES------
 Single game MODE
 Multi game MODE
 Displays the win & win boxes
 Restarts the game on hit of restart button
+AI mode
+Check my Favicon
 
 --WISHLIST---
 Highlight the right button to click
