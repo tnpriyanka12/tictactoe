@@ -11,7 +11,7 @@ INSTRUCTIONS:
 
 
 ------ LINK TO GAME ---------
-file:///Users/ramidipriyanka/wdi/projects/project0/index.html
+https://tnpriyanka12.github.io/tictactoe/
 
 
 ---- KNOWN BUGS ------

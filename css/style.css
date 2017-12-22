@@ -93,11 +93,15 @@ footer{
 }
 
 
-
+/*
 .singleplay-button{
   display: none;
 }
 
 .multiplay-button{
   display: none;
+}*/
+
+.button:hover{
+  cursor: pointer;
 }
