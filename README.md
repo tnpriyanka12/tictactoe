@@ -15,12 +15,14 @@ https://tnpriyanka12.github.io/tictactoe/
 
 
 ---- KNOWN BUGS ------
--> When game is drawn , only X is printing in box - fixed
--> Multi game mode is not enabled from screen, works when variable is set in JS file
+-> (Fixed) When game is drawn , only X is printing in box - fixed
+-> (Fixed) Multi game mode is not enabled from screen, works when variable is set in JS file
 -> image mode (not working)
 -> AI is not at all intelligent. Just puts X in random boxes
 ->Errors during AI mode, but game works !!
--> multiple box clicks x
+-> multiple  clicks  in single box needs to be disabled
+-> Game doesn't reset scores when multiple plays is clicked again. Score resets only when another mode is selected
+-> Randomly, boxes only print 'X'. Cant figure out why ???
 
 -------FEATURES------
 Single game MODE
