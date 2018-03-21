@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     //As a box clicks, check which symbol to insert and check for match
     $('.box').on('click', function(){
-
+      $(this).off('click');
       console.log(`hello hereeeee`);
       const symbolToInsert = gameChecks.checkSymbol();
       $(this).html(symbolToInsert);
