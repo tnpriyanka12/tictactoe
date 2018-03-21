@@ -248,8 +248,11 @@ const allTurnsFinished = function(){
     console.log(`ALL TURNS FIN MATCH DRAW`);
     console.log(`symb count1 = ${symbolCount}`);
     $gamestatus = $('#game-status');
+
     $gamestatus.html(`MATCH DRAW`);
       $('.box').off('click');
+
+
     askForRepeatPlay();
 
 };//allTurnsfinished
@@ -276,6 +279,9 @@ const askForRepeatPlay =  function(){
       $para.animate({
         fontSize: '20pt'
       }, 2500);
+      $gamestatus.animate({fontSize: '30pt', opacity: '0.8', color: 'yellow'}, 2500);
+
+
 
       $('.play-button p').on('click', function(){
         resetGame();
