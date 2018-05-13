@@ -19,6 +19,7 @@ $(document).ready(function(){
 
   let playMode = 'single';
   let aiActve = 0;
+  let twist = 1;
 
   const initGame = function () {
 
@@ -228,10 +229,19 @@ const aiModeGame = function(){
   initGame();
 };
 
+
+const twistModeGame = function(){
+  console.log('twist');
+  $('#game_container').addClass("gamespin");
+
+};
+
+
 //ACTUAL
   $('.play-button').on( 'click', initGame );
   $('.multiplay-button').on('click', multiGame);
   $('.aimode-button').on('click', aiModeGame);
+  $('.twist-button').on('click', twistModeGame);
 
 
 
@@ -288,8 +298,6 @@ const askForRepeatPlay =  function(){
       });
 
 };
-
-
 
 //AI mode
 const playAIMode = function(){
