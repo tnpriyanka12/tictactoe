@@ -112,10 +112,31 @@ footer{
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
+@-moz-keyframes colorchange /* Firefox */ {
+    0% {background:red;}
+    50% {background:yellow;}
+    100% {background:red;}
+}
+@-webkit-keyframes colorchange /* Safari and Chrome */ {
+    0% {background:red;}
+    50% {background:yellow;}
+    100% {background:red;}
+}
+@keyframes flashing {
+  100% {
+    opacity: 0;
+    background-color: colorchange 2s ;
+  }
+}
 
 .gamespin{
   -webkit-animation:spin 2s linear infinite;
  -moz-animation:spin 2s linear infinite;
  animation:spin 2s linear infinite;
+}
+
+
+.gameflash{
+  animation: flashing 0.4s linear infinite;
+
 }

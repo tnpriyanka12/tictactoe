@@ -235,13 +235,18 @@ const twistModeGame = function(){
   $('#game_container').addClass("gamespin");
 
 };
+const flashModeGame = function(){
+  console.log('flash');
+  $('#game_container').addClass("gameflash");
 
+};
 
 //ACTUAL
   $('.play-button').on( 'click', initGame );
   $('.multiplay-button').on('click', multiGame);
   $('.aimode-button').on('click', aiModeGame);
   $('.twist-button').on('click', twistModeGame);
+  $('.flash-button').on('click', flashModeGame);
 
 
 
