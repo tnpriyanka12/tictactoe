@@ -15,14 +15,16 @@ $(document).ready(function(){
   //let playMode = 'multi';
   let box = {};
   let randBox = '';
+  let symbol = 0;
 
 
   let playMode = 'single';
   let aiActve = 0;
   let twist = 1;
+  let $gamestatus = $('#game-status');
 
   const initGame = function () {
-
+    console.log('initgame started');
     // start a single player game (when the page first loads, this is the default)
     if(playMode == 'single'){
        //Highlight single game MODE
@@ -30,6 +32,7 @@ $(document).ready(function(){
          color: 'yellow'
        });
     }//if playmode = single
+
     //Start when play button is clicked
     $('.box').css({
     backgroundColor: '',
@@ -44,20 +47,16 @@ $(document).ready(function(){
   $playbutton.html('Game in Progress...')
   //Show the game board
   $('#game_container').slideDown('slow');
-
-
     //As a box clicks, check which symbol to insert and check for match
     $('.box').on('click', function(){
+      console.log('box clicked');
       $(this).off('click');
-      console.log(`hello hereeeee`);
       const symbolToInsert = gameChecks.checkSymbol();
       $(this).html(symbolToInsert);
       $(this).css({
         height: '100px',
         fontSize: '50px'
       });
-      console.log(`im hereeeeeee: ${symbolCount}`);
-
       //Once symbol is inserted, check for Match, i.e, check for win
       gameChecks.checkForMatch();
 
@@ -76,29 +75,29 @@ $(document).ready(function(){
     //Alternate between symbols.
     //When All turns are over (9 turns) -> game finished
     checkSymbol: function() {
-      let symbol = 0;
       if(symbolCount % 2 == 0){
           symbol =  'O';
       } else {
           symbol =  'X';
       }
+      console.log('symbol is', symbol);
       symbolCount++;
       return symbol;
     },//checkSymbol()
 
     //Check & Display Which player won & display in #game-status class
     checkGameStatus: function(){
-      $gamestatus = $('#game-status');
       $gamestatus.css({
         fontSize: '20px'
       });
       symbolCount--;
-      $gamestatus.html(`Player  ${this.checkSymbol()}  WINS`);
       $('.box').off('click');
-
+      let currSym = this.checkSymbol();
+      symbolCount--;
+      $gamestatus.html(`Player  ${currSym}  WINS`);
+      
       if(playMode == 'multi'){
-        console.log(`cureeeent symb: ${this.checkSymbol()}`);
-        if(this.checkSymbol() == 'X'){
+        if(currSym == 'X'){
           playerOneWinCount++;
           console.log(`cureeeent player1count: ${playerOneWinCount}`);
 
@@ -108,7 +107,7 @@ $(document).ready(function(){
 
         }
 
-        $gamestatus.html(`Player  ${this.checkSymbol()}  WINS
+        $gamestatus.html(`Player  ${currSym}  WINS
         <br/>Player X Score : ${playerOneWinCount}
         <br/>Player O Score : ${playerTwoWinCount}`);
       };
@@ -359,6 +358,5 @@ const playAIMode = function(){
 };
 
 
-  initGame(); // start the game in single player mode when the page loads
 
 });//ready fn()
