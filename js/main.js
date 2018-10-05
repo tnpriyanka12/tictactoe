@@ -237,7 +237,7 @@ const twistModeGame = function(){
 };
 const flashModeGame = function(){
   console.log('flash');
-  $('#game_container').addClass("gameflash");
+  $('#game_container').addClass("fl");
 
 };
 

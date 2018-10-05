@@ -1,4 +1,6 @@
-This is Priyanka's TICTACTOE Project0 README
+This is  TICTACTOE Project0 README
+*Not responsive
+*
 
 INSTRUCTIONS:
 - Hit PLAY to Start
