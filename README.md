@@ -10,7 +10,7 @@ INSTRUCTIONS:
 - Winner displayed if there is winner, else  'draw' is shown
 - Hit ReStart to restart the game fresh.
 
-![alt text](/ttt.jpeg)
+![sample image](/ttt.JPG)
 
 
 
