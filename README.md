@@ -23,10 +23,9 @@ https://tnpriyanka12.github.io/tictactoe/
 -> (Fixed) Multi game mode is not enabled from screen, works when variable is set in JS file
 -> image mode (not working)
 -> AI is not at all intelligent. Just puts X in random boxes
-->Errors during AI mode, but game works !!
 -> multiple  clicks  in single box needs to be disabled
--> Game doesn't reset scores when multiple plays is clicked again. Score resets only when another mode is selected
--> Randomly, boxes only print 'X'. Cant figure out why ???
+-> Randomly, boxes only print 'X'. (Fixed)
+->Errors during AI mode, but game works !!
 
 -------FEATURES------
 Single game MODE
