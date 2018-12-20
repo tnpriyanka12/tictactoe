@@ -2,13 +2,15 @@ This is  TICTACTOE Project0 README
 *Not responsive
 *
 
+My first ever HTML, CSS, JS Project. Before i knew the term 'Bootstrap'
+
 INSTRUCTIONS:
 - Hit PLAY to Start
 - Alternate players take turns to play
 - Winner displayed if there is winner, else  'draw' is shown
 - Hit ReStart to restart the game fresh.
 
-
+![alt text](/ttt.jpeg)
 
 
 
